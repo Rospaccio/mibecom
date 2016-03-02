@@ -1,0 +1,10 @@
+{
+  "postsSiteUrl" : "http://localhost:9000/posts",
+  "posts":[
+    {
+      "index" : 0,
+      "indexTitle" : "First post",
+      "url" : "/posts/bootstrap.md"
+    }
+  ]
+}

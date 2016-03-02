@@ -1,6 +1,7 @@
 var Codevomit = {};
 Codevomit.Blog = {};
-(Codevomit.Blog.App = function(){
+Codevomit.Blog.App = {};
+Codevomit.Blog.App.init = function(){
 
   console.log('Here we go');
 
@@ -15,18 +16,36 @@ Codevomit.Blog = {};
     smartypants: false
   });
 
-  hljs.initHighlightingOnLoad();
+  var container = $("#postsIndex");
 
-  var container = $("#mdContainer");
-  $.get("README.md", function(data){
-    container.html( marked(data) );
+  $.get("conf.json", function(data){
 
-    /* */
-    $("code").each(function(i, block){
-      hljs.highlightBlock(block);
+    // container.html( marked(data) );
+
+    console.log(data);
+    console.log(data.posts);
+    data.posts.forEach(function(post){
+      var newItem = document.createElement("li");
+
+      var newItem = document.createElement("li");
+      var anchorToPost = newItem.appendChild( document.createElement("a") );
+      var jQAnchor = $(anchorToPost);
+      jQAnchor.click(function(){
+        Codevomit.Blog.App.showPost(post.url);
+      });
+      jQAnchor.html(post.indexTitle);
+
+      container.append(newItem)
     });
-    /* */
 
   });
+};
 
-})();
+Codevomit.Blog.App.showPost = function(postUrl){
+  var container = $("#postContainer");
+  $.get(postUrl, function(data){
+    container.html( marked(data) );
+  });
+};
+
+Codevomit.Blog.App.init();
