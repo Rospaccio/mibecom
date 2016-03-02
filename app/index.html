@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>codevomit blog</title>
 
+    <link rel="stylesheet" href="/bower_components/highlight-js/src/styles/default.css">
+    <script src="/bower_components/highlight-js/src/languages/javascript.js"></script>
+
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
@@ -22,8 +25,7 @@
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
 
-    <script src="/bower_components/marked/marked.min.js" />
-
+    <script src="/bower_components/highlight-js/src/highlight.js" />
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -46,8 +48,26 @@
         <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
       </div>
 
-      <div id="mdContainer" class="well">
+      <div id="mdContainer" class="container">
 
+      </div>
+
+      <div>
+        <h2>This section is hardcoded HTML</h2>
+        <pre>
+            <code class="js">
+  marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false
+  });
+            </code>
+        </pre>
       </div>
 
       <div class="footer">
@@ -68,6 +88,7 @@
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/marked/lib/marked.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
