@@ -7,6 +7,7 @@ Ok, let's try to render some Markdown code fragments.
 This is JavaScript, in all its glory:
 
     Codevomit.Blog.App.showPost = function(postUrl){
+      /*  gets the container element */
       var container = $("#postContainer");
       $.get(postUrl, function(data){
         container.html( marked(data) );

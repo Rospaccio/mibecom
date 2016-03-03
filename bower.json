@@ -1,11 +1,10 @@
 {
-  "name": "codevomit-blog",
+  "name": "mibecom",
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
     "marked": "~0.3.5",
-    "jquery": "~2.2.1",
-    "highlight-js": "^9.2.0"
+    "jquery": "~2.2.1"
   },
   "overrides": {
     "bootstrap-sass": {
@@ -24,7 +23,7 @@
   "authors": [
     "Rospaccio <alberto.mercati@gmail.com>"
   ],
-  "description": "",
+  "description": "A Minimal Blog Engine for Code Monkeys",
   "main": "",
   "moduleType": [],
   "license": "GPL v3",
