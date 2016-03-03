@@ -44,7 +44,10 @@ Codevomit.Blog.App.showPost = function(postUrl){
   var container = $("#postContainer");
   $.get(postUrl, function(data){
     container.html( marked(data) );
-    hljs.in
+    var codeBlocks = container.find("pre code");
+    codeBlocks.each(function(i, block){
+      hljs.highlightBlock(block);
+    });
   });
 };
 

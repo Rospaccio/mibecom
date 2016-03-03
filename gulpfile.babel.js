@@ -94,6 +94,12 @@ gulp.task('posts', () => {
   ]).pipe(gulp.dest('dist/posts'));
 });
 
+gulp.task('lib', () => {
+  return gulp.src([
+    'app/lib/**'
+  ]).pipe(gulp.dest('dist/lib'));
+});
+
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
@@ -165,14 +171,14 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'posts'], () => {
+gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras', 'posts', 'lib'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
-gulp.task('build-skip-lint', ['html', 'images', 'fonts', 'extras', 'posts'], () => {
+gulp.task('build-skip-lint', ['html', 'images', 'fonts', 'extras', 'posts', 'lib'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
 gulp.task('default', ['clean'], () => {
-  gulp.start('build');
+  gulp.start('build-skip-lint');
 });

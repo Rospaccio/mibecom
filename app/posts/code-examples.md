@@ -12,6 +12,7 @@ This is JavaScript, in all its glory:
       $.get(postUrl, function(data){
         container.html( marked(data) );
       });
+      console.log("Done!");
     };
 
 ## HTML
