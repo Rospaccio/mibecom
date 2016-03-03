@@ -20,10 +20,8 @@ Codevomit.Blog.App.init = function(){
 
   $.get("conf.json", function(data){
 
-    // container.html( marked(data) );
+    Codevomit.Blog.App.Configuration = data;
 
-    console.log(data);
-    console.log(data.posts);
     data.posts.forEach(function(post){
       var newItem = document.createElement("li");
 
@@ -31,7 +29,8 @@ Codevomit.Blog.App.init = function(){
       var anchorToPost = newItem.appendChild( document.createElement("a") );
       var jQAnchor = $(anchorToPost);
       jQAnchor.click(function(){
-        Codevomit.Blog.App.showPost(post.url);
+        var prefix = Codevomit.Blog.App.Configuration.postsSiteUrl;
+        Codevomit.Blog.App.showPost(prefix + post.url);
       });
       jQAnchor.html(post.indexTitle);
 
@@ -45,7 +44,10 @@ Codevomit.Blog.App.showPost = function(postUrl){
   var container = $("#postContainer");
   $.get(postUrl, function(data){
     container.html( marked(data) );
+    hljs.in
   });
 };
+
+Codevomit.Blog.App.Configuration = {};
 
 Codevomit.Blog.App.init();

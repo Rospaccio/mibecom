@@ -1,15 +1,15 @@
 {
-  "postsSiteUrl" : "http://localhost:9000/posts",
+  "postsSiteUrl" : "/posts",
   "posts":[
     {
       "index" : 0,
       "indexTitle" : "About MiBECoM",
-      "url" : "/posts/readme.md"
+      "url" : "/readme.md"
     },
     {
       "index" : 1,
       "indexTitle" : "An exercise in coding",
-      "url" : "/posts/code-examples.md"
+      "url" : "/code-examples.md"
     }
   ]
 }

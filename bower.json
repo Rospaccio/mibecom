@@ -1,6 +1,5 @@
 {
   "name": "codevomit-blog",
-  "private": true,
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "modernizr": "~2.8.1",
@@ -20,5 +19,20 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5"
-  }
+  },
+  "homepage": "https://github.com/Rospaccio/mibecom",
+  "authors": [
+    "Rospaccio <alberto.mercati@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "GPL v3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
