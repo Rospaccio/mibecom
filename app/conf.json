@@ -4,12 +4,14 @@
     {
       "index" : 0,
       "indexTitle" : "About MiBECoM",
-      "url" : "/readme.md"
+      "url" : "/readme.md",
+      "publishDate" : "2016-03-01"
     },
     {
       "index" : 1,
       "indexTitle" : "An exercise in coding",
-      "url" : "/code-examples.md"
+      "url" : "/code-examples.md",
+      "publishDate" : "2016-03-02"
     }
   ]
 }

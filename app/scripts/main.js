@@ -22,6 +22,8 @@ Codevomit.Blog.App.init = function(){
 
     Codevomit.Blog.App.Configuration = data;
 
+    data.posts.sort(Codevomit.Blog.App.postCompare);
+
     data.posts.forEach(function(post){
       var newItem = document.createElement("li");
 
@@ -49,6 +51,10 @@ Codevomit.Blog.App.showPost = function(postUrl){
       hljs.highlightBlock(block);
     });
   });
+};
+
+Codevomit.Blog.App.postCompare = function(firstPost, secondPost){
+  return secondPost.index - firstPost.index;
 };
 
 Codevomit.Blog.App.Configuration = {};
