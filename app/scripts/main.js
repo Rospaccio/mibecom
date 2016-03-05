@@ -39,6 +39,8 @@ Codevomit.Blog.App.init = function(){
       container.append(newItem)
     });
 
+    Codevomit.Blog.App.showPost(Codevomit.Blog.App.Configuration.postsSiteUrl + data.posts[0].url);
+
   });
 };
 
