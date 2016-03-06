@@ -114,11 +114,16 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+  background: url('../images/background.png') no-repeat center center;
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
   .btn {
     font-size: 21px;
     padding: 14px 24px;
+  }
+  .em-text {
+    color: white;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   }
 }
 
