@@ -60,6 +60,9 @@
     </div>
 
     <div class="container">
+      <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
 <!--
       <div class="page-header">
         <h1>The Codevomit Blog</h1>
@@ -75,7 +78,12 @@
             <h2 id="postTitle" class="blog-post-title">Post Title</h2>
             <p id="postSubtitle" class="blog-post-meta"> publish date, author</p>
             -->
-            <div id="postContainer"></div>
+            <div id="postContainer">
+            </div>
+            <!-- Comments section powered by Disqus -->
+            <div id="disqus_thread"></div>
+
+              <!-- Comments section: END -->
           </div><!-- /.blog-post -->
 <!--
           <nav>
@@ -88,7 +96,7 @@
 
         </div><!-- /.blog-main -->
 
-        <div class="col-md-3 blog-sidebar">
+        <div id="sidebar" class="col-md-3 sidebar-offcanvas">
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
           </div>
@@ -157,5 +165,28 @@
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
+
+    <script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+    /* */
+    var disqus_config = function () {
+    console.log("disqus_config ==> " + Codevomit.Blog.App.pageDisqusId);
+    this.page.url = "http://codevomit.xyz/blog" + Codevomit.Blog.App.pageDisqusId; // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = Codevomit.Blog.App.pageDisqusId; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    /* */
+    (function setupDisqus() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+
+    s.src = '//codevomit-blog.disqus.com/embed.js';
+
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
   </body>
 </html>

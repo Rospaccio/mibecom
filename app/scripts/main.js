@@ -5,6 +5,12 @@ Codevomit.Blog.App.init = function(){
 
   console.log('Here we go');
 
+  $(document).ready(function () {
+    $('[data-toggle="offcanvas"]').click(function () {
+      $('.row-offcanvas').toggleClass('active')
+    });
+  });
+
   marked.setOptions({
     renderer: new marked.Renderer(),
     gfm: true,
@@ -48,11 +54,25 @@ Codevomit.Blog.App.showPost = function(postUrl){
   var container = $("#postContainer");
   $.get(postUrl, function(data){
     container.html( marked(data) );
+    Codevomit.Blog.App.pageDisqusId = postUrl;
+    Codevomit.Blog.App.resetDisqus(Codevomit.Blog.App.pageDisqusId, postUrl);
     var codeBlocks = container.find("pre code");
     codeBlocks.each(function(i, block){
       hljs.highlightBlock(block);
     });
   });
+};
+
+Codevomit.Blog.App.resetDisqus = function (newIdentifier, pageUrl) {
+  if(typeof DISQUS !== 'undefined'){
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.identifier = newIdentifier;
+        this.page.url = "http://codevomit.xyz/blog" + pageUrl;
+      }
+    });
+  }
 };
 
 Codevomit.Blog.App.postCompare = function(firstPost, secondPost){
