@@ -32,34 +32,42 @@
 
   <body>
 
-<!--
-    <div class="blog-masthead">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item" href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
-        </nav>
-      </div>
-    </div>
--->
-
-    <div class="container">
-      <div class="header">
-          <ul class="nav nav-pills pull-right">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Codevomit blog</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
             <li><a href="#">Home</a></li>
-            <li><a href="#">New features</a></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">New hires</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
           </ul>
-          <h3 class="text-muted">The Codevomit Blog</h3>
+        </div><!--/.nav-collapse -->
       </div>
-    </div>
+    </nav>
 
-    <div class="container">
+    <div class="container theme-showcase" role="main">
+
+      <div class="jumbotron">
+        <h1>Codevomit</h1>
+        <p>
+          <em>CodeVomit is code churned out thousands of lines at a time,
+            sometimes using CopyAndPasteProgramming, but usually by just
+            brain dumping onto the keyboard.
+          </em>
+
+          [<a href="http://c2.com/cgi/wiki?CodeVomit"> http://c2.com/cgi/wiki?CodeVomit </a>]
+
+        </p>
+      </div>
 
 <!--
       <div class="page-header">
