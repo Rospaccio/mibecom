@@ -3,6 +3,7 @@ Codevomit.Blog = {};
 Codevomit.Blog.App = {};
 Codevomit.Blog.App.init = function(){
 
+  // TODO replace this unacceptable greeting with a cool ascii art
   console.log('Here we go');
 
   $(document).ready(function () {
@@ -22,9 +23,27 @@ Codevomit.Blog.App.init = function(){
     smartypants: false
   });
 
-  var container = $("#postsIndex");
+  Codevomit.Blog.App.initConfiguration();
+  Codevomit.Blog.App.initNavBarPages();
 
+}; /* end init */
+
+Codevomit.Blog.App.checkIfPostSpecified = function(){
+  var currentURL = window.location.href;
+  console.log("current URL = " + currentURL);
+  var isBookmarkPresent = currentURL.indexOf("#") > 0;
+  if(isBookmarkPresent){
+    var lastSeparator = currentURL.lastIndexOf("/");
+    var postRelativeURL = currentURL.substring(lastSeparator);
+    Codevomit.Blog.App.showPost(Codevomit.Blog.App.Configuration.postsSiteUrl + postRelativeURL);
+    return true;
+  }
+  return false;
+};
+
+Codevomit.Blog.App.initConfiguration = function(){
   /* gets the configuration and sets the post links up*/
+  var container = $("#postsIndex");
   $.get("conf.json", function(data){
     Codevomit.Blog.App.Configuration = data;
     data.posts.sort(Codevomit.Blog.App.postCompare);
@@ -47,26 +66,20 @@ Codevomit.Blog.App.init = function(){
     }
   });
   /* end configuration */
-}; /* end init */
+};
 
-Codevomit.Blog.App.checkIfPostSpecified = function(){
-  var currentURL = window.location.href;
-  console.log("current URL = " + currentURL);
-  var isBookmarkPresent = currentURL.indexOf("#") > 0;
-  if(isBookmarkPresent){
-    var lastSeparator = currentURL.lastIndexOf("/");
-    var postRelativeURL = currentURL.substring(lastSeparator);
-    Codevomit.Blog.App.showPost(Codevomit.Blog.App.Configuration.postsSiteUrl + postRelativeURL);
-    return true;
-  }
-  return false;
+Codevomit.Blog.App.initNavBarPages = function(){
+  var navBarLinksContainer = $("#navBarLinksContainer");
+  var anchors = navBarLinksContainer.find("li a");
+  anchors.each(function(element){
+    console.log("hi, i'm " + element);
+  });
 };
 
 Codevomit.Blog.App.checkHostAndPossiblyRedirect = function(){
   console.log("Codevomit.Blog.App.Configuration.preferredHost = " + Codevomit.Blog.App.Configuration.preferredHost);
   if(!window.location.host.startsWith(Codevomit.Blog.App.Configuration.preferredHost))
   {
-    console.log("Trying to redirect...");
     var currentHost = window.location.host;
     console.log("currentHost = " + currentHost);
     var preferredHref = window.location.href.replace(currentHost, Codevomit.Blog.App.Configuration.preferredHost);

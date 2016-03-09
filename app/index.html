@@ -45,10 +45,10 @@
           <a class="navbar-brand" href="#">Codevomit blog</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <ul id="navBarLinksContainer" class="nav navbar-nav">
+            <!-- <li><a href="#">Home</a></li> -->
+            <li><a id="aboutPageAnchor" href="#about"    onclick="Codevomit.Blog.App.showPost('/pages/about.md')">About</a></li>
+            <li><a id="followPageAnchor" href="#contact" onclick="Codevomit.Blog.App.showPost('/pages/follow.md')">Follow me on nowhere</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

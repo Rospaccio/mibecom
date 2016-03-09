@@ -2,6 +2,16 @@
 
   "preferredHost": "localhost:9000",
   "postsSiteUrl" : "/posts",
+  "navBarPages" : [
+    {
+      "index" : 0,
+      "url" : "about.md"
+    },
+    {
+      "index" : 1,
+      "url" : "follow.md"
+    }
+  ],
   "posts":[
     {
       "index" : 0,
