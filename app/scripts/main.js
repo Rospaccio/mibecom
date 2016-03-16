@@ -4,7 +4,8 @@ Codevomit.Blog.App = {};
 Codevomit.Blog.App.init = function(){
 
   window.onpopstate = function(event){
-    console.log(JSON.stringify(event));
+    console.log(JSON.stringify(event.state.url));
+    Codevomit.Blog.App.showPostByRelativeUrl(event.state.url, false);
   };
 
   // TODO replace this unacceptable greeting with a cool ascii art
@@ -34,12 +35,11 @@ Codevomit.Blog.App.init = function(){
 
 Codevomit.Blog.App.checkIfPostSpecified = function(){
   var currentURL = window.location.href;
-  console.log("current URL = " + currentURL);
   var isBookmarkPresent = currentURL.indexOf("#") > 0;
   if(isBookmarkPresent){
     var lastSeparator = currentURL.lastIndexOf("/");
     var postRelativeURL = currentURL.substring(lastSeparator);
-    Codevomit.Blog.App.showPost(Codevomit.Blog.App.Configuration.postsSiteUrl + postRelativeURL);
+    Codevomit.Blog.App.showPostByRelativeUrl(postRelativeURL);
     return true;
   }
   return false;
@@ -58,7 +58,7 @@ Codevomit.Blog.App.initConfiguration = function(){
       var jQAnchor = $(anchorToPost);
       jQAnchor.click(function(){
         var prefix = Codevomit.Blog.App.Configuration.postsSiteUrl;
-        Codevomit.Blog.App.showPost(prefix + post.url);
+        Codevomit.Blog.App.showPost(post); //prefix + post.url);
       });
       jQAnchor.html(post.indexTitle);
       container.append(newItem)
@@ -66,7 +66,9 @@ Codevomit.Blog.App.initConfiguration = function(){
     Codevomit.Blog.App.checkHostAndPossiblyRedirect();
     if(!Codevomit.Blog.App.checkIfPostSpecified()){
       /* no post specified in the URL, so we load the default one*/
-      Codevomit.Blog.App.showPost(Codevomit.Blog.App.Configuration.postsSiteUrl + data.posts[0].url);
+      // console.log("default post:");
+      // console.log(JSON.stringify(data.posts[0]));
+      Codevomit.Blog.App.showPost(data.posts[0]); //Codevomit.Blog.App.Configuration.postsSiteUrl + data.posts[0].url);
     }
   });
   /* end configuration */
@@ -76,37 +78,51 @@ Codevomit.Blog.App.initNavBarPages = function(){
   var navBarLinksContainer = $("#navBarLinksContainer");
   var anchors = navBarLinksContainer.find("li a");
   anchors.each(function(element){
-    console.log("hi, i'm " + element);
+    // console.log("hi, i'm " + element);
   });
 };
 
 Codevomit.Blog.App.checkHostAndPossiblyRedirect = function(){
-  console.log("Codevomit.Blog.App.Configuration.preferredHost = " + Codevomit.Blog.App.Configuration.preferredHost);
+  // console.log("Codevomit.Blog.App.Configuration.preferredHost = " + Codevomit.Blog.App.Configuration.preferredHost);
   if(!window.location.host.startsWith(Codevomit.Blog.App.Configuration.preferredHost))
   {
     var currentHost = window.location.host;
-    console.log("currentHost = " + currentHost);
+    // console.log("currentHost = " + currentHost);
     var preferredHref = window.location.href.replace(currentHost, Codevomit.Blog.App.Configuration.preferredHost);
-    console.log("preferredHref = " + preferredHref);
+    // console.log("preferredHref = " + preferredHref);
     window.location.href = preferredHref;
   }
 };
 
-Codevomit.Blog.App.showPost = function(postUrl){
+Codevomit.Blog.App.showPost = function(post){
+  Codevomit.Blog.App.showPostByRelativeUrl(post.url);
+};
+
+Codevomit.Blog.App.showPostByRelativeUrl = function(postRelativeUrl, mustPushState){
+  if(mustPushState === undefined){
+    mustPushState = true;
+  }
+
   var container = $("#postContainer");
-  $.get(postUrl, function(data){
+
+  // builds the post's URL
+  var completePostUrl = Codevomit.Blog.App.Configuration.postsSiteUrl + postRelativeUrl
+
+  $.get(completePostUrl, function(data){
     container.html( marked(data) );
-    Codevomit.Blog.App.pageDisqusId = postUrl;
-    Codevomit.Blog.App.resetDisqus(Codevomit.Blog.App.pageDisqusId, postUrl);
+    Codevomit.Blog.App.pageDisqusId = postRelativeUrl;
+    Codevomit.Blog.App.resetDisqus(Codevomit.Blog.App.pageDisqusId, postRelativeUrl);
+    // activates Highlight.js on the code blocks of the post
     var codeBlocks = container.find("pre code");
     codeBlocks.each(function(i, block){
       hljs.highlightBlock(block);
     });
 
-    /* let's update the history and the url bar appropriately */
-    var stateObject = {url:  postUrl};
-    window.history.pushState(stateObject, {}, "#" + postUrl);
-
+    if(mustPushState){
+      /* let's update the history and the url bar appropriately */
+      var stateObject = {url:  postRelativeUrl};
+      window.history.pushState(stateObject, {}, "#" + postRelativeUrl);
+    }
   });
 };
 
@@ -115,8 +131,11 @@ Codevomit.Blog.App.resetDisqus = function (newIdentifier, pageUrl) {
     DISQUS.reset({
       reload: true,
       config: function () {
+        // console.log("resetDisqus: identifier = " + newIdentifier);
         this.page.identifier = newIdentifier;
+        // console.log("resetDisqus: pageUrl = " + pageUrl);
         this.page.url = "http://codevomit.xyz/blog" + pageUrl;
+        // console.log("resetDisqus: page.url = " + this.page.url);
       }
     });
   }
