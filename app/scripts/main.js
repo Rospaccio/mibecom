@@ -3,6 +3,10 @@ Codevomit.Blog = {};
 Codevomit.Blog.App = {};
 Codevomit.Blog.App.init = function(){
 
+  window.onpopstate = function(event){
+    console.log(JSON.stringify(event));
+  };
+
   // TODO replace this unacceptable greeting with a cool ascii art
   console.log('Here we go');
 
@@ -100,7 +104,8 @@ Codevomit.Blog.App.showPost = function(postUrl){
     });
 
     /* let's update the history and the url bar appropriately */
-    window.history.pushState({}, {}, "#" + postUrl);
+    var stateObject = {url:  postUrl};
+    window.history.pushState(stateObject, {}, "#" + postUrl);
 
   });
 };

@@ -6,7 +6,7 @@ by the frustration I usually feel when Wordpress auto-escapes certain characters
 
 MiBECoM is partly inspired by Github Pages and Jekyll
 
-An auto-referential, almost up to date instance of [MiBECoM is online here](http://codevomit.xyz/blog).
+An auto-referential, almost up to date instance of [MiBECoM is online here](http://www.codevomit.xyz/blog).
 
 ### Features
 
